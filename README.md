@@ -22,7 +22,7 @@ Each dictionary holds a specific type of information:
                         'orig_lang_sub' :           original language determined by subtracting channels
                         'sub_data' :                data for subtraction decision
                         'diarization:' :            speaker diarization from pyannote
-                        'window' :                  most likely interpreter speaking window
+                        'window' :                  most likely speaking window
                         'date' :                    date of the session (sometimes =/= date of the speech)
                         'time' :                    time of the speech
                         'session' :                 number of the session (1-96)
@@ -39,87 +39,102 @@ Each dictionary holds a specific type of information:
 
 ## speaker_data
 
-    self.speaker_data 'name' :     set_speaker_data() requires europarl-direct or similar info and outputs from meps meta (currently manually set from cleaned resoup data)
-                      'group' :    set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'gender' :   set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'birthday' : set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'age' :      set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'native' :   set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'wiki' :     set_speaker_data() requires europarl-direct or similar info and outputs from meps meta
-                      'ed_name': based on europarl direct.
-                      'ed_aff': based on europarl direct
-                      'eu_name': based on europarl
-                      'eu_aff' : based on europarl
-                      
+    self.speaker_data 'name' :      name of the speaker according to europarl-scrape match
+                      'group' :     political group of the speaker accroding to europarl-scrapt
+                      'gender' :    gender of the speaker
+                      'birthday' :  birthday of the speaker
+                      'age' :       age of the speaker at the time of the speech
+                      'native' :    native language of the speaker
+                      'wiki' :      wiki link to the speaker
+                      'ed_name':    name of the speaker according to europarl-direct
+                      'ed_aff':     political group of the speaker according to europarl-direct
+                      'eu_name':    name of the speaker according to europarl
+                      'eu_aff' :    political group of the speaker according to europarl-direct
+                                            
                       
                       
                       
 ## language_data
 
-    language_data : 'df_transcription': 
-                    'df_confidence': 
-                    'df_is_translation': 
-                    'df_manually_corrected':  
-                    'relay_interp' : none
-                    'retour_interp': none
-                    'is_translation_perc' : kaldi
-                    'speech_duration' : based on samples and sample rate
-                    'verbatim_file' : verbatim file according to kaldi sm
-                    'verbatim_speech' : 
-                    'verbatim_ratio' : 
-                    'whisper' : whisper transcription
-                    'interpreter_window' : based on diarisation and embedding
-                    'w_verbatim_speech':
-                    'w_verbatim_ratio':
-                    'w_verbatim_file': verbatim file according to whisper sm
-                    'p_verbatim_speech': parallelised
-                    'ed_file': based on europarl direct.
-                    'ed_ratio' : based on europarl direct.
-                    'ed_speech' : based on europarl direct.
-                    'eu_file'   : based on europarl.
-                    'eu_ratio'  : based on europarl.
-                    'eu_speech' : based on europarl.
+    language_data : 'df\_transcription':        Kaldi transcription, phrase level time aligned 
+                    'df_confidence':            Kaldi confidence, phrase level
+                    'df_is_translation':        Kaldi translation, phrase level
+                    'df_manually_corrected':    Whether checked by a human or not, phrase level
+                    'relay_interp' :            (not yet set)
+                    'retour_interp':            (not yet set)
+                    'is_translation_perc' :     Kaldi decision if translation or not
+                    'speech_duration' :         Speech duration (sample rate * samples)
+                    'verbatim_file' :           europarl-direct verbatim file based on Kaldi
+                    'verbatim_speech' :         europarl-direct verbatim report based on Kaldi
+                    'verbatim_ratio' :          europarl-direct sequence matcher ratio based on Kaldi
+                    'whisper' :                 whisper transcription
+                    'interpreter_window' :      most likely (interpreter) speaking window
+                    'w_verbatim_speech':        europarl-scrape verbatim speech based on Whisper
+                    'w_verbatim_ratio':         europarl-scrape sequence matcher ratio based on Whisper
+                    'w_verbatim_file':          europarl-scrape verbatim file based on Whisper
+                    'p_verbatim_speech':        Parallelised text according to Whisper + europarl-direct
+                    'ed_file':                  europarl-direct verbatim file based on Whisper
+                    'ed_ratio' :                europarl-direct sequence matcher ratio based on Whisper
+                    'ed_speech' :               europarl-direct verbatim speech based on Whisper
+                    'eu_file'   :               europarl verbatim file based on Whisper
+                    'eu_ratio'  :               europarl sequence matcher ratio based on Whisper
+                    'eu_speech' :               europarl verbatim speech based on Whisper
+                      
+                      
+                      
                       
 ## file_data
 
-    self.file_data  'mp3_paths' :       
-                    'eaf_path' :        eaf_extraction[0]
-                    'folder_name' :     eaf_extraction[0][76:-4]
-                    'file_name':        current_container.file_data['folder_name'][-26:]
-                    
-                    
 File Data holds information about the mp3, eaf, folder and file. This will only work if the whole corpus tree is cloned from GitHub or the corpus structure is reassembled by hand.
+
+    self.file_data  'mp3\_paths' :      path to the original mp3 
+                    'eaf_path' :        path to the eaf
+                    'folder_name' :     folder name for the recording
+                    'file_name':        current filename                    
+                    
+
+
 
 ## _eaf_data¶
 
-    self._eaf_data    'time_dictionary' : eaf_extraction[1],
-                      'eaf_duration' :    max(eaf_extraction[1].values()),
-                      'date' :            eaf_extraction[3][0],
-                      'property_tag' :    eaf_extraction[3][1]}
+The eaf data is not supposed to be accessed, this just holds information to (re-)build an eaf
 
+    self.\_eaf\_data  'time\_dictionary' :      the time dictionary data from the original eaf
+                      'eaf_duration' :          the last entry in the time dictionary
+                      'date' :                  the date from the eaf name
+                      'property_tag' :          the property tag contents from the eaf
 
 
 
 
 # Detailed Overview
-## file_data
 
- '/corpus/{}/'.format(eaf_extraction[0][76:-4])
- 
- 
- 'mp3_paths' :       
-                    'eaf_path' :        eaf_extraction[0]
-                    'folder_name' :     eaf_extraction[0][76:-4]
-                    'file_name':        current_container.file_data['folder_name'][-26:]
 ## speech_data
 
-    self.speech_data    'samples' :     just set from pickle (requires audio_info_overview folder)
-                        'sample_rate' : just set from pickle (requires audio_info_overview folder)
-                        'length' :      just set from pickle (requires audio_info_overview folder)
-                        'orig_lang' : -------------------
-                        'orig_lang_kaldi' : set_orig_lang_kaldi() (requires find_and_set_translation_perc())
-                        'kaldi_data' :      set_orig_lang_kaldi (requires find_and_set_translation_perc())
-                        'orig_lang_zcr' : set_orig_lang_zcr() (requires pickle from zcr)
+### samples
+The number of samples that have been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
+### sample_rate
+The sample rate that has been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
+###length
+The length, calculated from sample_rate * samples
+### orig_lang
+(unset)
+### orig_lang_kaldi
+The original language detected by Kaldi. This is documented in a function within container_utils.
+The function weights each language detected by Kaldi according to its segment duration(s).
+### kaldi_data
+The most highly weighted languages for comparison purposes.
+### orig_lang_zcr
+The original language detected by the zcr method. This is documented in a function within container_utils.
+This calculates the zero-crossing-rate in windows for each audio channel.
+Interpreters often speak "on top" of a muffled original speaker channel, therefore the audio signal has a systematically different structure than the audio signal that contains only one person speaking. Their microphones may also be different and they are often too close to the microphone. Last but not least the underlying noise level is a lot lower in the cabin.
+This is not always reliable because sometimes there is no interpreter and sometimes the interpreter is tech-savvy enough to completely remove the original speaker channel.
+### zcr_data
+The zcr data for comparison purposes.
+### orig_lang_whisper
+
+
+
                         'zcr_data' :      set_orig_lang_zcr() (requires pickle from zcr)
                         'orig_lang_whisper' :  set_orig_lang_whisper() (requires pickle from whisper)
                         'whisper_data' :       just set from pickle (requires pickle from whisper)
@@ -137,6 +152,22 @@ File Data holds information about the mp3, eaf, folder and file. This will only 
                         'orig_w_verbatim_langs' : manually set from the cleaned resoup
                         'orig_lang_ed': based on europarl direct.
                         'orig_lang_eu' : based on europarl
+
 ## speaker_data
-## eaf_Data
+
+
 ## language_data
+
+## file_data
+
+
+ 'mp3_paths' :       
+                    'eaf_path' :        eaf_extraction[0]
+                    'folder_name' :     eaf_extraction[0][76:-4]
+                    'file_name':        current_container.file_data['folder_name'][-26:]
+
+
+## eaf_Data
+
+
+
