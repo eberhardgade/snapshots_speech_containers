@@ -27,9 +27,9 @@
       <rect fill="none" x="400" width="111.088" height="30" y="400" clip-path="url(#clipPath2)"/>
       <text x="422.3565" xml:space="preserve" y="419.6553" clip-path="url(#clipPath2)" font-family="'Open Sans'" stroke="none">['_eaf_data']</text>
       <rect x="628.8864" y="200" clip-path="url(#clipPath2)" fill="none" width="300" stroke-dasharray="6,2" height="30" stroke="rgb(153,153,153)"/>
-      <text x="634.8864" y="219.6553" clip-path="url(#clipPath2)" fill="rgb(153,153,153)" font-family="'Open Sans'" stroke="none" xml:space="preserve">Information related to the original speaker</text>
+      <text x="634.8864" y="219.6553" clip-path="url(#clipPath2)" fill="rgb(153,153,153)" font-family="'Open Sans'" stroke="none" xml:space="preserve">Information related to the whole speech</text>
       <rect x="628.8864" y="250" clip-path="url(#clipPath2)" fill="none" width="300" stroke-dasharray="6,2" height="30" stroke="rgb(153,153,153)"/>
-      <text x="634.8864" y="269.6553" clip-path="url(#clipPath2)" fill="rgb(153,153,153)" font-family="'Open Sans'" stroke="none" xml:space="preserve">Information related to the whole speech</text>
+      <text x="634.8864" y="269.6553" clip-path="url(#clipPath2)" fill="rgb(153,153,153)" font-family="'Open Sans'" stroke="none" xml:space="preserve">Information related to the original speaker</text>
       <rect x="628.8864" y="300" clip-path="url(#clipPath2)" fill="none" width="300" stroke-dasharray="6,2" height="30" stroke="rgb(153,153,153)"/>
       <text x="634.8864" y="319.6553" clip-path="url(#clipPath2)" fill="rgb(153,153,153)" font-family="'Open Sans'" stroke="none" xml:space="preserve">Information related to each audio channel content</text>
       <rect x="628.8864" y="350" clip-path="url(#clipPath2)" fill="none" width="300" stroke-dasharray="6,2" height="30" stroke="rgb(153,153,153)"/>
