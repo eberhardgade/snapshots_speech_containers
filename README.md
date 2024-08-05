@@ -9,12 +9,12 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-self.speech_data$${\color{red}['key']}$$ | content
+self.speech_data`['key']` | content
 --- | ---
-'samples' | number of samples in the recording
-'sample_rate' | sample rate of recording
-'length' | length in seconds of the recording
-'orig_lang' | (not yet set)
+['samples'] | number of samples in the recording
+['sample_rate'] | sample rate of recording
+['length'] | length in seconds of the recording
+['orig_lang'] | (not yet set)
 
                         'orig_lang_kaldi' :         original language as detected by kaldi
                         'kaldi_data' :              data for kaldi decision
