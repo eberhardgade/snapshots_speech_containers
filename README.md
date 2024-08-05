@@ -149,7 +149,7 @@ The most highly weighted languages for comparison purposes.
 **orig_lang_zcr']**
  
 The original language detected by the zcr method. This is documented in a function within container_utils.
-This calculates the zero-crossing-rate in windows for each audio channel.
+This function calculates the zero-crossing-rate in windows for each audio channel.
 Interpreters often speak "on top" of a muffled original speaker channel, therefore the audio signal has a systematically different structure than the audio signal that contains only one person speaking. Their microphones may also be different and they are often too close to the microphone. Last but not least the underlying noise level is a lot lower in the cabin.
 This is not always reliable because sometimes there is no interpreter and sometimes the interpreter is tech-savvy enough to completely remove the original speaker channel.
 ***
@@ -159,39 +159,58 @@ The zcr data for comparison purposes.
 ***
 **['orig_lang_whisper']**
 
+The original language detected by Whisper. This is done by providing whisper with 15 second windows (+15 seconds of silence) in 3 second leaps over the whole recording.
+The result is a list of tuples containing the language and the number of windows assigned to this language (created via collections.Counter)
+Please mind some idiosyncrasies, above all Whisper likes to classify British English as 'cy' (Welsh) and also tends to favor the larger languages within a family.
 ***
 **['whisper_data']**
 
+The full list of tuples including the language and the number of windows assigned to this language.
+Please mind some idiosyncrasies, above all Whisper likes to classify British English as 'cy' (Welsh) and also tends to favor the larger languages within a family.
 ***
 **['orig_lang_sub']**
 
+The original language detected by the subtraction method. This is documented in a function within container_utils.
+This is a simple method that inverts the waveform of the original recording and subtracts it from the waveform of the audio channels. The idea is that if there is no interpreter then the waveforms should be identical and cancel each other out.
+This is not always reliable, because sometimes there is no interpreter for a language that is not the original and sometimes the channel deviates from the original channel for an unknown reason.
 ***
 **['sub_data']**
 
+The sub data for comparison purposes.
 ***
 **['diarization']**
 
+This contains a pandas dataframe with the information how many speakers there are and which speaker speaks when. This was done with [pyannote](https://github.com/pyannote/pyannote-audio) using English settings, so language changes are often seen as language changes. There is as of now no language independent diarization library, although there are theoretical papers on how to build one. It is recommended to rerun this for more precise measurements if a pretrained model for the target language is available.
 ***
 **['window']**
+
+--I am not sure right now if I ever put this in the container--
+This contains the recording window of the speaker who speaks the longest in the recording.
 
 ***
 **['date']**
 
+The date of the _session_. this may be different from the time of the speech, because some sessions go past midnight.
 ***
 **['time']**
 
+The time of the recording according to the filename provided by the [Eurpean Parliament](https://multimedia.europarl.europa.eu/en/webstreaming)
 ***
 **['session']**
 
+The number of the session (starts with 1 on 01.09.2008 and ends with 96 in 2010)
 ***
 **['location']**
 
+The location of the session: Strasbourg or Brussels. This may be relevant for phonetics or accuracy of the subtraction method, because of technical differences and different phonetics (Brussels is wood, Strasbourg is glass + cloth)
 ***
 **['cycle']**
 
+The number within the cycle (Brussels has a cycle of 2, Strasbourg has a cycle of 4 sessions)
 ***
 **['subject']**
 
+The subject
 ***
 **['chair']**
 
@@ -279,7 +298,14 @@ The zcr data for comparison purposes.
 
 ***
 **['interpreter_window']**
+A tuple containing
+- number of speakers not in _1_und
+- their index in the diarization and embeddings
+- the embeddings of these speakers
+- sum of diarized segments
+- start of first diarized segment, end of last diarized segment, duration
 
+This is currently only used to save a bit of time with the Whisper transcriptions and avoid errors at the edges of a speech. This works very well with interpreter channels
 ***
 **['w_verbatim_speech']**
 
