@@ -2,7 +2,7 @@
 Each container has, 5 attributes: 5 dictionaries.
 Each dictionary holds a specific type of information:
 
-![alt text](http://url/to/img.png)
+![Overview](github-documentation/corpus-structure-top-level.svg)
 
 # Content Overview
 
