@@ -9,30 +9,31 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-    self.speech_data    ['samples' :                 number of samples in the recording](#samples)
-                        'sample_rate' :             sample rate of recording
-                        'length' :                  length in seconds of the recording
-                        'orig_lang' :               (not yet set)
-                        'orig_lang_kaldi' :         original language as detected by kaldi
-                        'kaldi_data' :              data for kaldi decision
-                        'orig_lang_zcr' :           original language as determined by zcr-comparison
-                        'zcr_data' :                data for zcr decision
-                        'orig_lang_whisper' :       original language as determined by whisper
-                        'whisper_data' :            data for whisper decision       
-                        'orig_lang_sub' :           original language determined by subtracting channels
-                        'sub_data' :                data for subtraction decision
-                        'diarization:' :            speaker diarization from pyannote
-                        'window' :                  most likely speaking window
-                        'date' :                    date of the session (sometimes =/= date of the speech)
-                        'time' :                    time of the speech
-                        'session' :                 number of the session (1-96)
-                        'location' :                location of the session (Strasbourg or Brussels)
-                        'cycle' :                   number in cycle (4 in Strasbourg, 2 in Brussels)
-                        'subject' :                 topic the speech belongs to
-                        'chair' :                   person presiding during the speech
-                        'orig_w_verbatim_langs' :   original language according to europarl-scrape matching
-                        'orig_lang_ed':             original language according to europarl-direct matching
-                        'orig_lang_eu' :            original language according to europarl matching
+self.speech_data 
+    [\['samples'\] :                 number of samples in the recording](#samples)
+    'sample_rate' :             sample rate of recording
+    'length' :                  length in seconds of the recording
+    'orig_lang' :               (not yet set)
+    'orig_lang_kaldi' :         original language as detected by kaldi
+    'kaldi_data' :              data for kaldi decision
+    'orig_lang_zcr' :           original language as determined by zcr-comparison
+    'zcr_data' :                data for zcr decision
+    'orig_lang_whisper' :       original language as determined by whisper
+    'whisper_data' :            data for whisper decision       
+    'orig_lang_sub' :           original language determined by subtracting channels
+    'sub_data' :                data for subtraction decision
+    'diarization:' :            speaker diarization from pyannote
+    'window' :                  most likely speaking window
+    'date' :                    date of the session (sometimes =/= date of the speech)
+    'time' :                    time of the speech
+    'session' :                 number of the session (1-96)
+    'location' :                location of the session (Strasbourg or Brussels)
+    'cycle' :                   number in cycle (4 in Strasbourg, 2 in Brussels)
+    'subject' :                 topic the speech belongs to
+    'chair' :                   person presiding during the speech
+    'orig_w_verbatim_langs' :   original language according to europarl-scrape matching
+    'orig_lang_ed':             original language according to europarl-direct matching
+    'orig_lang_eu' :            original language according to europarl matching
 
 
 
