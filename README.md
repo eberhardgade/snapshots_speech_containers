@@ -9,10 +9,12 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-    self.speech_data    'samples' :                 number of samples in the recording
-                        'sample_rate' :             sample rate of recording
-                        'length' :                  length in seconds of the recording
-                        'orig_lang' :               (not yet set)
+self.speech_data
+'samples' | number of samples in the recording
+'sample_rate' | sample rate of recording
+'length' | length in seconds of the recording
+'orig_lang' | (not yet set)
+
                         'orig_lang_kaldi' :         original language as detected by kaldi
                         'kaldi_data' :              data for kaldi decision
                         'orig_lang_zcr' :           original language as determined by zcr-comparison
@@ -113,11 +115,11 @@ The eaf data is not supposed to be accessed, this just holds information to (re-
 ***
 **['samples']**
 
-The number of samples that have been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
+The number of samples that have been extracted from the \_1\_und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
 ***
 **['sample_rate']**
  
-The sample rate that has been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
+The sample rate that has been extracted from the \_1\_und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
 ***
 **['length']**
  
