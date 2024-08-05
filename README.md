@@ -41,58 +41,64 @@ self.speech_data`['key']` | content
 
 ## speaker_data
 
-    self.speaker_data   'name' :      name of the speaker according to europarl-scrape match
-                        'group' :     political group of the speaker accroding to europarl-scrapt
-                        'gender' :    gender of the speaker
-                        'birthday' :  birthday of the speaker
-                        'age' :       age of the speaker at the time of the speech
-                        'native' :    native language of the speaker
-                        'wiki' :      wiki link to the speaker
-                        'ed_name':    name of the speaker according to europarl-direct
-                        'ed_aff':     political group of the speaker according to europarl-direct
-                        'eu_name':    name of the speaker according to europarl
-                        'eu_aff' :    political group of the speaker according to europarl-direct
+self.speaker_data`['key']` | content
+--- | ---
+['name'] | name of the speaker according to europarl-scrape match
+['group'] | political group of the speaker accroding to europarl-scrapt
+['gender'] | gender of the speaker
+['birthday'] | birthday of the speaker
+['age'] | age of the speaker at the time of the speech
+['native'] | native language of the speaker
+['wiki'] | wiki link to the speaker
+['ed_name'] | name of the speaker according to europarl-direct
+['ed_aff'] | political group of the speaker according to europarl-direct
+['eu_name'] | name of the speaker according to europarl
+['eu_aff'] | political group of the speaker according to europarl-direct
                                             
                       
                       
                       
 ## language_data
 
-    language_data :     'df_transcription':        Kaldi transcription, phrase level time aligned 
-                        'df_confidence':            Kaldi confidence, phrase level
-                        'df_is_translation':        Kaldi translation, phrase level
-                        'df_manually_corrected':    Whether checked by a human or not, phrase level
-                        'relay_interp' :            (not yet set)
-                        'retour_interp':            (not yet set)
-                        'is_translation_perc' :     Kaldi decision if translation or not
-                        'speech_duration' :         Speech duration (sample rate * samples)
-                        'verbatim_file' :           europarl-direct verbatim file based on Kaldi
-                        'verbatim_speech' :         europarl-direct verbatim report based on Kaldi
-                        'verbatim_ratio' :          europarl-direct sequence matcher ratio based on Kaldi
-                        'whisper' :                 whisper transcription
-                        'interpreter_window' :      most likely (interpreter) speaking window
-                        'w_verbatim_speech':        europarl-scrape verbatim speech based on Whisper
-                        'w_verbatim_ratio':         europarl-scrape sequence matcher ratio based on Whisper
-                        'w_verbatim_file':          europarl-scrape verbatim file based on Whisper
-                        'p_verbatim_speech':        Parallelised text according to Whisper + europarl-direct
-                        'ed_file':                  europarl-direct verbatim file based on Whisper
-                        'ed_ratio' :                europarl-direct sequence matcher ratio based on Whisper
-                        'ed_speech' :               europarl-direct verbatim speech based on Whisper
-                        'eu_file'   :               europarl verbatim file based on Whisper
-                        'eu_ratio'  :               europarl sequence matcher ratio based on Whisper
-                        'eu_speech' :               europarl verbatim speech based on Whisper
-                      
-                      
-                      
-                      
+language_data['eng']`['key']` | content
+--- | ---
+['df_transcription'] | Kaldi transcription, phrase level time aligned 
+['df_confidence'] | Kaldi confidence, phrase level
+['df_is_translation'] | Kaldi translation, phrase level
+['df_manually_corrected'] | Whether checked by a human or not, phrase level
+['relay_interp'] | (not yet set)
+['retour_interp'] | (not yet set)
+['is_translation_perc'] | Kaldi decision if translation or not
+['speech_duration'] | Speech duration (sample rate * samples)
+['verbatim_file'] | europarl-direct verbatim file based on Kaldi
+['verbatim_speech'] | europarl-direct verbatim report based on Kaldi
+['verbatim_ratio'] | europarl-direct sequence matcher ratio based on Kaldi
+['whisper'] | whisper transcription
+['interpreter_window'] | most likely (interpreter) speaking window
+['w_verbatim_speech'] | europarl-scrape verbatim speech based on Whisper
+['w_verbatim_ratio'] | europarl-scrape sequence matcher ratio based on Whisper
+['w_verbatim_file'] | europarl-scrape verbatim file based on Whisper
+['p_verbatim_speech'] | Parallelised text according to Whisper + europarl-direct
+['ed_file'] | europarl-direct verbatim file based on Whisper
+['ed_ratio'] | europarl-direct sequence matcher ratio based on Whisper
+['ed_speech'] | europarl-direct verbatim speech based on Whisper
+['eu_file'] | europarl verbatim file based on Whisper
+['eu_ratio'] | europarl sequence matcher ratio based on Whisper
+['eu_speech'] | europarl verbatim speech based on Whisper
+
+
+
+
 ## file_data
 
 File Data holds information about the mp3, eaf, folder and file. This will only work if the whole corpus tree is cloned from GitHub or the corpus structure is reassembled by hand.
 
-    self.file_data      'mp3_paths' :      path to the original mp3 
-                        'eaf_path' :        path to the eaf
-                        'folder_name' :     folder name for the recording
-                        'file_name':        current filename                    
+self.file_data`['key']` | content
+--- | ---
+['mp3_paths'] | path to the original mp3 
+['eaf_path'] | path to the eaf
+['folder_name'] | folder name for the recording
+['file_name'] | current filename
                     
 
 
@@ -101,10 +107,12 @@ File Data holds information about the mp3, eaf, folder and file. This will only 
 
 The eaf data is not supposed to be accessed, this just holds information to (re-)build an eaf
 
-    self._eaf_data      'time_dictionary' :      the time dictionary data from the original eaf
-                        'eaf_duration' :          the last entry in the time dictionary
-                        'date' :                  the date from the eaf name
-                        'property_tag' :          the property tag contents from the eaf
+self._eaf_data`['key']` | content
+--- | ---
+['time_dictionary'] | the time dictionary data from the original eaf
+['eaf_duration'] | the last entry in the time dictionary
+['date'] | the date from the eaf name
+['property_tag'] | the property tag contents from the eaf
 
 
 
