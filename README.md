@@ -9,7 +9,7 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-    self.speech_data    'samples' :                 number of samples in the recording
+    self.speech_data    ['samples' :                 number of samples in the recording](#samples)
                         'sample_rate' :             sample rate of recording
                         'length' :                  length in seconds of the recording
                         'orig_lang' :               (not yet set)
@@ -115,7 +115,7 @@ The eaf data is not supposed to be accessed, this just holds information to (re-
 The number of samples that have been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
 ### sample_rate
 The sample rate that has been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
-###length
+### length
 The length, calculated from sample_rate * samples
 ### orig_lang
 (unset)
