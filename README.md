@@ -9,31 +9,30 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-self.speech_data 
-    [\['samples'\] :                 number of samples in the recording](#samples)
-    'sample_rate' :             sample rate of recording
-    'length' :                  length in seconds of the recording
-    'orig_lang' :               (not yet set)
-    'orig_lang_kaldi' :         original language as detected by kaldi
-    'kaldi_data' :              data for kaldi decision
-    'orig_lang_zcr' :           original language as determined by zcr-comparison
-    'zcr_data' :                data for zcr decision
-    'orig_lang_whisper' :       original language as determined by whisper
-    'whisper_data' :            data for whisper decision       
-    'orig_lang_sub' :           original language determined by subtracting channels
-    'sub_data' :                data for subtraction decision
-    'diarization:' :            speaker diarization from pyannote
-    'window' :                  most likely speaking window
-    'date' :                    date of the session (sometimes =/= date of the speech)
-    'time' :                    time of the speech
-    'session' :                 number of the session (1-96)
-    'location' :                location of the session (Strasbourg or Brussels)
-    'cycle' :                   number in cycle (4 in Strasbourg, 2 in Brussels)
-    'subject' :                 topic the speech belongs to
-    'chair' :                   person presiding during the speech
-    'orig_w_verbatim_langs' :   original language according to europarl-scrape matching
-    'orig_lang_ed':             original language according to europarl-direct matching
-    'orig_lang_eu' :            original language according to europarl matching
+    self.speech_data    'samples' :                 number of samples in the recording
+                        'sample_rate' :             sample rate of recording
+                        'length' :                  length in seconds of the recording
+                        'orig_lang' :               (not yet set)
+                        'orig_lang_kaldi' :         original language as detected by kaldi
+                        'kaldi_data' :              data for kaldi decision
+                        'orig_lang_zcr' :           original language as determined by zcr-comparison
+                        'zcr_data' :                data for zcr decision
+                        'orig_lang_whisper' :       original language as determined by whisper
+                        'whisper_data' :            data for whisper decision       
+                        'orig_lang_sub' :           original language determined by subtracting channels
+                        'sub_data' :                data for subtraction decision
+                        'diarization:' :            speaker diarization from pyannote
+                        'window' :                  most likely speaking window
+                        'date' :                    date of the session (sometimes =/= date of the speech)
+                        'time' :                    time of the speech
+                        'session' :                 number of the session (1-96)
+                        'location' :                location of the session (Strasbourg or Brussels)
+                        'cycle' :                   number in cycle (4 in Strasbourg, 2 in Brussels)
+                        'subject' :                 topic the speech belongs to
+                        'chair' :                   person presiding during the speech
+                        'orig_w_verbatim_langs' :   original language according to europarl-scrape matching
+                        'orig_lang_ed':             original language according to europarl-direct matching
+                        'orig_lang_eu' :            original language according to europarl matching
 
 
 
@@ -112,27 +111,35 @@ The eaf data is not supposed to be accessed, this just holds information to (re-
 
 ## speech_data
 
-### samples
+** samples **
 The number of samples that have been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
-### sample_rate
+
+ ** sample_rate **
 The sample rate that has been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
-### length
+
+ ** length **
 The length, calculated from sample_rate * samples
-### orig_lang
+
+ ** orig_lang **
 (unset)
-### orig_lang_kaldi
+
+ ** orig_lang_kaldi **
 The original language detected by Kaldi. This is documented in a function within container_utils.
 The function weights each language detected by Kaldi according to its segment duration(s).
-### kaldi_data
+
+ ** kaldi_data **
 The most highly weighted languages for comparison purposes.
-### orig_lang_zcr
+
+ ** orig_lang_zcr **
 The original language detected by the zcr method. This is documented in a function within container_utils.
 This calculates the zero-crossing-rate in windows for each audio channel.
 Interpreters often speak "on top" of a muffled original speaker channel, therefore the audio signal has a systematically different structure than the audio signal that contains only one person speaking. Their microphones may also be different and they are often too close to the microphone. Last but not least the underlying noise level is a lot lower in the cabin.
 This is not always reliable because sometimes there is no interpreter and sometimes the interpreter is tech-savvy enough to completely remove the original speaker channel.
-### zcr_data
+
+ ** zcr_data **
 The zcr data for comparison purposes.
-### orig_lang_whisper
+
+ ** orig_lang_whisper **
 
 
 
