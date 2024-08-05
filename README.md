@@ -9,7 +9,8 @@ Each dictionary holds a specific type of information:
 
 ## speech_data
 
-self.speech_data
+self.speech_data$${\color{red}['key']}$$ | content
+--- | ---
 'samples' | number of samples in the recording
 'sample_rate' | sample rate of recording
 'length' | length in seconds of the recording
