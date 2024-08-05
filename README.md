@@ -56,7 +56,7 @@ Each dictionary holds a specific type of information:
                       
 ## language_data
 
-    language_data : 'df\_transcription':        Kaldi transcription, phrase level time aligned 
+    language_data : 'df_transcription':        Kaldi transcription, phrase level time aligned 
                     'df_confidence':            Kaldi confidence, phrase level
                     'df_is_translation':        Kaldi translation, phrase level
                     'df_manually_corrected':    Whether checked by a human or not, phrase level
@@ -87,7 +87,7 @@ Each dictionary holds a specific type of information:
 
 File Data holds information about the mp3, eaf, folder and file. This will only work if the whole corpus tree is cloned from GitHub or the corpus structure is reassembled by hand.
 
-    self.file_data  'mp3\_paths' :      path to the original mp3 
+    self.file_data  'mp3_paths' :      path to the original mp3 
                     'eaf_path' :        path to the eaf
                     'folder_name' :     folder name for the recording
                     'file_name':        current filename                    
@@ -99,7 +99,7 @@ File Data holds information about the mp3, eaf, folder and file. This will only 
 
 The eaf data is not supposed to be accessed, this just holds information to (re-)build an eaf
 
-    self.\_eaf\_data  'time\_dictionary' :      the time dictionary data from the original eaf
+    self._eaf_data  'time_dictionary' :      the time dictionary data from the original eaf
                       'eaf_duration' :          the last entry in the time dictionary
                       'date' :                  the date from the eaf name
                       'property_tag' :          the property tag contents from the eaf
@@ -109,13 +109,12 @@ The eaf data is not supposed to be accessed, this just holds information to (re-
 
 # Detailed Overview
 
-## speech_data
+## speech_data details
 
 **samples**
 
 The number of samples that have been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
-
-
+***
  **sample_rate**
  
 The sample rate that has been extracted from the \_1_\und mp3 using [librosa](https://librosa.org/doc/latest/index.html)
