@@ -351,60 +351,114 @@ This is currently used to save a bit of time with the Whisper transcriptions and
 ***
 **['w_verbatim_speech']**
 
+europarl-scrape speech provided by Whisper transcription sequence matched with europarl-scrape speeches.
 ***
 **['w_verbatim_ratio']**
 
+sequence matcher ratio provided by Whisper transcription sequence matched with europarl-scrape speeches.
 ***
 **['w_verbatim_file']**
 
+europarl-scrape file provided by Whisper transcription sequence matched with europarl-scrape speeches.
 ***
 **['p_verbatim_speech']**
 
+This currently only works between English and German and holds the europarl-direct parallelised text in the other language.
 ***
 **['ed_file']**
 
+europarl-direct file provided by Whisper transcription sequence matched with europarl-direct speeches.
 ***
 **['ed_ratio']**
 
+sequence matcher ratio provided by Whisper transcription sequence matched with europarl-direct speeches.
 ***
 **['ed_speech']**
 
+europarl-direct file provided by Whisper transcription sequence matched with europarl-direct speeches.
 ***
 **['eu_file']**
 
+europarl file provided by Whisper transcription sequence matched with europarl speeches.
 ***
 **['eu_ratio']**
 
+sequence matcher ratio provided by Whisper transcription sequence matched with europarl speeches.
 ***
 **['eu_speech']**
 
+europarl file provided by Whisper transcription sequence matched with europarl speeches.
 ***
 ## file_data
+The file data contains file and folder names, often referring to the intended corpus structure.
 ***
 **['mp3_paths'']**
 
+The path to the recordings for this container.
 ***       
 **['eaf_path'']**
 
+The path to the eaf for this container.
 ***
 **['folder_name'']**
 
+The folder name where to find information pertaining to this container.
 ***
 **['file_name'']**
 
+The file name of the current container.
 ***
-## eaf_Data
+## _eaf_data
+The eaf data is required to (re-) build an eaf file for use in ELAN. 
+None of this is intended to be used directly (as hinted at by the initial underscore, Python's way of marking an attribute that is pseudo-private)
 ***
 
 **['time_dictionary'']**
 
+This contains the time stamps extracted from the beginning of the eaf file as a dictionary.
 ***
 **['eaf_duration'']**
 
+This is the last time stamp of the time_dictionary. Less reliable than samplerate*sample size, used for normalisation in Kaldi related calculations and 
+reversing them.
 ***
 **['date'']**
 
+This is basically just taken from the file name, which has not changed since the eaf days.
 ***
 **['property_tag'']**
 
+This tag is used in eaf to store additional information. None of this seemed particularly important so far, but I chose to grab it nonetheless.
 ***
+
+# Methods
+These methods so far only provide a basic functionality to store the containers, easy migration or make them operable with ELAN. This requires more work.
+
+to_pickle()
+
+to_eaf()
+
+from_eaf()
+
+from_nothing()
+
+# container_utils
+None of these functions except pickle_iterator() are really intended to be used or easy to use. These are documentations for how things were done.
+
+pickle_iterator()
+
+calculate_translation_perc()
+
+set_orig_lang_kaldi()
+
+calculate_zcr_reliability()
+
+estimate_orig_lang_whisper()
+
+estimate_orig_lang_sub()
+
+set_session_data()
+
+set_subject()
+
+set_chair_from_time()
