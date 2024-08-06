@@ -210,92 +210,134 @@ The number within the cycle (Brussels has a cycle of 2, Strasbourg has a cycle o
 ***
 **['subject']**
 
-The subject
+The agenda item under which the speech was held. This is quite reliable and very useful for excluding "Voting Sessions" and "Question Time Sessions", which follow their own rules.
 ***
 **['chair']**
 
+The person sitting in the president's chair during the speech. This may be used for more precise cuts of the speech, since the president's speaker embedding is usually known.
 ***
 **['orig_w_verbatim_langs']**
 
+The original language as provided by a matched europarl-scrape report. Very reliable if sequence matching ratio > 0.4.
 ***
 **['orig_lang_ed']**
 
+The original language as provided by matched europarl-direct report. The most reliable, but most reliable source (it's vital to how europarl-direct works), but also the most scarce. Very reliable if sequence matching ratio > 0.4.
 ***
 **['orig_lang_eu']**
 
+The original language as provided by matched europarl report. This may be the least reliable, because this did not fill in the source language (English reports do not specify English, German reports do not specify German), so the best match often does not provide the language.
 ***
 ## speaker_data details
+Speaker data has been obtained by first scraping the list of MEPs for the period 2004-2009 and 2009-2014 from Wikipedia. The English and German Wikipedia page were used for this step. This list often already contained the link to the individual Wikipedia page for each MEP. But if it didn't, an automatic search was performed. If this still yielded nothing (or a disambiguation page - I did not make an automatic decision there), the Wikipedia entry in the MEPs country's (as provided in the Wikipedia list) main language was used. This has all been performed automatically, but no errors were found in a sample of each step.
+
+On top of that the European Parliament provides (semantically tagged!) MEP information pages. These pages unfortunately get deleted after a while, so these were not available for all members from 20 years ago. This data was considered more reliable and generally replaced the Wikipedia info. There was no gender information on the MEPs' pages, so gender comes exclusively from Wikipedia pronoun counting.
+
+The speaker data has been linked to each speech by using the Python sequence matcher to match the transcription of the speech and its verbatim report, which contains the name and political affiliation of the speaker (see language_data for more information).
 ***
 **['name']**
 
+The name of the speaker. Provided by europarl, overwritten if europarl-scrape differs, overwritten again if europarl-direct differs - in theory. They don't actually differ and if they ever do I'll hunt the error down in great detail.
 ***
 **['group']**
 
+Political group of the speaker. Provided by europarl, overwritten if europarl-scrape differs, overwritten again if europarl-direct differs - in theory. They don't actually differ and if they ever do I'll hunt the error down in great detail.
 ***
 **['gender']**
 
+Gender of the speaker. This has been automatically obtained by counting pronouns on the Wikipedia page. Usually accurate, should be combined with F0 measurement or some other kind of confirmation, but it's mostly reliable.
 ***
 **['birthday']**
 
+Birthday of the speaker. Obtained from Wikipedia, overwritten if Europarl MEP page exists.
 ***
 **['age']**
 
+Age of the speaker at the time of the speech. Calculated from birthday and speech_data['time'].
 ***
 **['native']**
 
+Not set, but always true for the samples because we exclude non-native speakers for the corpus.
 ***
 **['wiki']**
 
+Wikipedia link (and europarl MEP link if it exists).
 ***
 **['ed_name']**
 
+The name of the speaker as provided by europarl-direct.
 ***
 **['ed_aff']**
 
+The political party of the speaker as provided by europarl-direct.
 ***
 **['eu_name']**
 
+The name of the speaker as provided by europarl.
 ***
 **['eu_aff']**
 
+The political party of the speaker as provided by europarl.
 ***
 ## language_data
+Language data was obtained in a number of steps. First there was the automatic transcription step. Performed once with Kaldi (by phrase) and once with Whisper (whole speech, timestamps provided). The Kaldi transcription was applied to speeches cut into phrases, the Whisper transcription was applied to speech-windows defined by edge-silence removal using [pydub]() and speaker diarization and embeddings using [pyannote](). These transcriptions were then matched with verbatim reports obtained directly from the European Parliament to link them with speaker metadata. 
+
+In a second step these transcriptions were handed to human annotators for each language to proofread, cut the edges, correct whisper and annotate interpreter errors. (Present time, the following is unfinished! It's written in past tense because I don't want to write this again.) After this lengthy process, the corrected transcriptions were time aligned with the Montreal Forced Aligner as this would provide phoneme level alignment and the highest accuracy. The results were transformed into a human-readable dataframe with each row providing a word, start time, end time, duration, average F0, average intensity (compensated for fricatives), a talking speed statistic and (longer) breaks. 
+
+In the last step the words with semantic content were given an index which relates them to the other languages' dataframe's words. This was performed via an expensive process starting with stop word removal and ending with matching words within a word number based scanning window using a comparison of a list of possible translations. Details provided below.
 ***
 **['df_transcription']**
 
+The result of the Kaldi transcription. This is a dataframe with one phrase, eaf ID and time information per row.
 ***
 **['df_confidence']**
 
+Fitting the df_transcription this is a dataframe which holds the Kaldi confidence value, its eaf ID and matching transcription ID.
 ***
 **['df_is_translation']**
 
+Fitting the df_transcription this is a dataframe which holds a Kaldi decision whether the phrase is translated or not, its eaf ID and matching transcription ID.
 ***
 **['df_manually_corrected']**
 
+Fitting the df_transcription this is a dataframe which holds a segment corresponding to the transcription which determines whether the segment has been manually currectes, its eaf ID and matching transcription ID.
 ***
 **['relay_interp']**
 
+not set
 ***
 **['retour_interp']**
 
+not set
 ***
 **['is_translation_perc']**
 
+Calculated from the phrase-wise "is_translation" decision made by Kaldi. This sums the segments weighted by their length, then divides by overall length.
 ***
 **['speech_duration']**
 
+This is calculated from df_transcription time columns, used for Kaldi calculations.
 ***
 **['verbatim_file']**
 
+europarl-direct file provided by Kaldi transcription sequence matched with europarl-direct speeches.
 ***
 **['verbatim_speech']**
 
+europarl-direct speech provided by Kaldi transcription sequence matched with europarl-direct speeches.
 ***
 **['verbatim_ratio']**
 
+sequence matcher ratio provided by Kaldi transcription sequence matched with europarl-direct speeches.
 ***
 **['whisper']**
 
+Transcription by whisper using the following parameters:
+- hallucination_silence_threshold = 2, 
+- beam_size = 5, 
+- patience = 2
+
+These settings have been thoroughly tested on an initial sample with future human annotation in mind. These can (and will be) greatly refined for each language to expand the human annotated sample.
 ***
 **['interpreter_window']**
 A tuple containing
@@ -305,7 +347,7 @@ A tuple containing
 - sum of diarized segments
 - start of first diarized segment, end of last diarized segment, duration
 
-This is currently only used to save a bit of time with the Whisper transcriptions and avoid errors at the edges of a speech. This works very well with interpreter channels
+This is currently used to save a bit of time with the Whisper transcriptions and avoid errors at the edges of a speech. This generally works very well with interpreter channels, less well with the original audio (use longest speaker instead) and unfortunately, but obviously fails if an orator and a previous (or following) speaker have the same language translated by the same interpreter. None of this results in a catastrophic failure (nothing is cut, only too much is included), but the quality of the whisper transcription suffers at the edges.
 ***
 **['w_verbatim_speech']**
 
